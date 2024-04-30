@@ -2,6 +2,7 @@
 
 import { axiosInstance } from '@/lib/axios';
 import { User } from '@/types/user.type';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
 interface RegisterArgs extends Omit<User, 'id'> {
@@ -14,7 +15,10 @@ const useRegister = () => {
       await axiosInstance.post('/auth/register', payload);
       router.push('/login');
     } catch (error) {
-      console.log(error);
+      //   console.log(error);
+      if (error instanceof AxiosError) {
+        alert(JSON.stringify(error.message));
+      }
     }
   };
   return { register };
