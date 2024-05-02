@@ -16,7 +16,7 @@ const useForgotPassword = () => {
     try {
       setIsLoading(true);
       const { data } = await axiosInstance.post<ForgotPasswordResponse>(
-        '/auth/login',
+        '/auth/forgot-password',
         { email },
       );
 
