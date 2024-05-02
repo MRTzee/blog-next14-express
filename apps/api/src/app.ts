@@ -12,7 +12,7 @@ import { SampleRouter } from './routers/sample.router';
 import { AuthRouter } from './routers/auth.router';
 
 export default class App {
-  private app: Express;
+  readonly app: Express;
 
   constructor() {
     this.app = express();
@@ -31,7 +31,8 @@ export default class App {
     // not found
     this.app.use((req: Request, res: Response, next: NextFunction) => {
       if (req.path.includes('/api/')) {
-        res.status(404).send('Not found !');
+        // 404
+        res.status(500).send('Not found !');
       } else {
         next();
       }
@@ -41,7 +42,7 @@ export default class App {
     this.app.use(
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         if (req.path.includes('/api/')) {
-          console.error('Error : ', err.stack);
+          // console.error('Error : ', err.stack);
           res.status(500).send(err.message);
         } else {
           next();
