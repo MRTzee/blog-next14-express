@@ -24,7 +24,7 @@ const Login = () => {
   return (
     <main className="container mx-auto h-[90vh] px-4">
       <div className="mt-40 flex justify-center">
-        <Card>
+        <Card className="w-[450px]">
           <CardHeader>
             <CardTitle className="text-center text-3xl text-primary">
               Login
