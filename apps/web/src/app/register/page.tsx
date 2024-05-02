@@ -47,7 +47,7 @@ const Register = () => {
                 />
                 <FormInput
                   name="email"
-                  type="text"
+                  type="email"
                   label="Email"
                   placeholder="Email"
                   value={formik.values.email}
