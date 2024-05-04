@@ -9,7 +9,7 @@ import { notFound, useSearchParams } from 'next/navigation';
 import useResetPassword from '@/hooks/api/auth/useResetPassword';
 import { Loader2 } from 'lucide-react';
 
-const ResetPassword = () => {
+const ResetPassword: React.FC = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
 

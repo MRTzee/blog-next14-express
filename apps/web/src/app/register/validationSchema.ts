@@ -3,5 +3,7 @@ import * as Yup from 'yup';
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string().required('Password is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Your password is too short'),
 });
