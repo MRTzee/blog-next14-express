@@ -70,7 +70,9 @@ const Register = () => {
                   handleBlur={formik.handleBlur}
                 />
               </div>
-              <Button className="mt-6 w-full">Register</Button>
+              <Button className="mt-6 w-full" type="submit">
+                Register
+              </Button>
             </form>
           </CardContent>
         </Card>
