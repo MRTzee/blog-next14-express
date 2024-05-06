@@ -26,9 +26,9 @@ export class AuthController {
 
   async keepLoginController(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = req.body.user.id;
+      const userId = Number(req.body.user.id);
 
-      const result = await KeepLoginService(Number(id));
+      const result = await KeepLoginService(userId);
 
       return res.status(200).send(result);
     } catch (error) {

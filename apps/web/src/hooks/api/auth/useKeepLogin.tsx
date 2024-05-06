@@ -19,10 +19,10 @@ const useKeepLogin = () => {
 
       dispatch(loginAction(data.data));
     } catch (error) {
-      if (error instanceof AxiosError) {
-        // FIXME: chane alert to toast
-        alert(error?.response?.data);
-      }
+      // if (error instanceof AxiosError) {
+      //   // FIXME: chane alert to toast
+      //   alert(error?.response?.data);
+      // }
     }
   };
   return { keepLogin };
