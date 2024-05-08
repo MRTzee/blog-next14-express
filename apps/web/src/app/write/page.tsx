@@ -7,18 +7,25 @@ import PreviewImages from '@/components/PreviewImage';
 import RichTextEditor from '@/components/RichTextEditor';
 import { Button } from '@/components/ui/button';
 import AuthGuard from '@/hoc/AuthGuard';
+import useCreateBlog from '@/hooks/api/blog/useCreateBlog';
+import { useAppSelector } from '@/redux/hooks';
+import { IFormCreateBlog } from '@/types/blog.type';
 import { useFormik } from 'formik';
+import 'react-quill/dist/quill.snow.css';
 
 const Write = () => {
+  const { createBlog } = useCreateBlog();
+  const { id } = useAppSelector((state) => state.user);
+
   const {
     handleSubmit,
     handleChange,
     handleBlur,
+    setFieldValue,
     values,
     errors,
     touched,
-    setFieldValue,
-  } = useFormik({
+  } = useFormik<IFormCreateBlog>({
     initialValues: {
       title: '',
       category: '',
@@ -26,10 +33,15 @@ const Write = () => {
       description: '',
       content: '',
     },
-    onSubmit: () => {},
+    onSubmit: (values) => {
+      createBlog({ ...values, userId: id });
+    },
   });
+
+  console.log(errors);
+
   return (
-    <main>
+    <main className="container mx-auto px-4 ">
       <form onSubmit={handleSubmit}>
         <div className="mx-auto flex max-w-5xl flex-col gap-4">
           <FormInput
@@ -43,33 +55,37 @@ const Write = () => {
             handleChange={handleChange}
             handleBlur={handleBlur}
           />
+
           <FormInput
             name="category"
             type="text"
-            label="category"
-            placeholder="category"
+            label="Category"
+            placeholder="Category"
             value={values.category}
             error={errors.category}
             isError={!!touched.category && !!errors.category}
             handleChange={handleChange}
             handleBlur={handleBlur}
           />
+
           <FormTextArea
             name="description"
-            label="description"
-            placeholder="description"
+            label="Desription"
+            placeholder="Description"
             value={values.description}
             error={errors.description}
             isError={!!touched.description && !!errors.description}
             handleChange={handleChange}
             handleBlur={handleBlur}
           />
+
           <PreviewImages
             fileImages={values.thumbnail}
             onRemoveImage={(idx: number) =>
-              setFieldValue('thumbnail', values.thumbnail?.toSpliced(idx, 1))
+              setFieldValue('thumbnail', values.thumbnail.toSpliced(idx, 1))
             }
           />
+
           <Dropzone
             isError={Boolean(errors.thumbnail)}
             label="Thumbnail"
@@ -80,12 +96,17 @@ const Write = () => {
               ])
             }
           />
+
           <RichTextEditor
             onChange={(html: string) => setFieldValue('content', html)}
-            label="Content"
+            label="content"
             value={values.content}
             isError={Boolean(errors.content)}
           />
+
+          <div className="mb-4 flex justify-end">
+            <Button className="submit">Submit</Button>
+          </div>
         </div>
       </form>
     </main>

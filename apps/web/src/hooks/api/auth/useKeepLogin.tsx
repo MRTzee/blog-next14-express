@@ -15,14 +15,11 @@ const useKeepLogin = () => {
   const keepLogin = async () => {
     try {
       const { data } =
-        await axiosWithoutToken.get<KeepLoginResponse>('/auth/keep-login');
+        await axiosInstance.get<KeepLoginResponse>('/auth/keep-login');
 
       dispatch(loginAction(data.data));
     } catch (error) {
-      if (error instanceof AxiosError) {
-        // FIXME: chane alert to toast
-        alert(error?.response?.data);
-      }
+      throw error;
     }
   };
   return { keepLogin };

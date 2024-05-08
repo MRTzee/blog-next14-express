@@ -3,25 +3,23 @@ import { User } from './user.type';
 export interface Blog {
   id: number;
   title: string;
-  desciption: string;
   category: string;
   content: string;
+  description: string;
   thumbnail: string;
   userId: number;
-  createdAt: number;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
   deletedAt: Date | null;
 
   user: User;
 }
 
-export interface IFromCreateBlog {
-  id: number;
+export interface IFormCreateBlog {
   title: string;
-  desciption: string;
-  content: string;
   category: string;
+  content: string;
+  description: string;
   thumbnail: File[];
-
   userId?: number;
 }

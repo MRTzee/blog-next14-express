@@ -1,5 +1,6 @@
 'use client';
-import MarkDown from '@/components/Markdown';
+
+import Markdown from '@/components/Markdown';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import useGetBlog from '@/hooks/api/blog/useGetBlog';
@@ -20,6 +21,7 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
       </div>
     );
   }
+
   if (!blog) {
     return notFound();
   }
@@ -28,12 +30,12 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
     <main className="container mx-auto px-4">
       <section className="mb-4">
         <div className="mb-4 space-y-1.5">
-          <Badge variant="outline" className="rounded-sm bg-green-100">
+          <Badge variant="outline" className=" rounded-sm bg-green-100">
             {blog.category}
           </Badge>
           <h1 className="text-4xl font-semibold">{blog.title}</h1>
           <div className="flex mb-2 items-center justify-between">
-            <p className="text-sm font-ligt italic">
+            <p className="text-base font-light italic">
               {format(new Date(blog.createdAt), 'dd MMMM yyyy')} -{' '}
               {blog.user.fullName}
             </p>
@@ -46,14 +48,14 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
         <div className="relative h-[400px]">
           <Image
             fill
-            src={`${appConfig.baseURL}/assets/${blog.thumbnail}`}
+            src={`${appConfig.baseURL}/assets${blog.thumbnail}`}
             alt="thumbnail image"
             className="object-cover bg-slate-200"
           />
         </div>
       </section>
       <section>
-        <MarkDown content={blog.content} />
+        <Markdown content={blog.content} />
       </section>
     </main>
   );
