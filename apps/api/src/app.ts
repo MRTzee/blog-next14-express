@@ -10,6 +10,7 @@ import cors from 'cors';
 import { PORT } from './config';
 import { AuthRouter } from './routers/auth.router';
 import { BlogRouter } from './routers/blog.router';
+import { join } from 'path';
 
 export default class App {
   readonly app: Express;
@@ -25,6 +26,7 @@ export default class App {
     this.app.use(cors());
     this.app.use(json());
     this.app.use(urlencoded({ extended: true }));
+    this.app.use('/assets', status)(join(__dirname, '.../public'));
   }
 
   private handleError(): void {
@@ -60,7 +62,7 @@ export default class App {
     });
 
     this.app.use('/api/auth', authRouter.getRouter());
-    this.app.use('/api/blog', blogRouter.getRouter());
+    this.app.use('/api/blogs', blogRouter.getRouter());
   }
 
   public start(): void {

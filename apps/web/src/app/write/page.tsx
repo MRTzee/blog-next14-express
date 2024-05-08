@@ -6,6 +6,7 @@ import FormTextArea from '@/components/FormTextArea';
 import PreviewImages from '@/components/PreviewImage';
 import RichTextEditor from '@/components/RichTextEditor';
 import { Button } from '@/components/ui/button';
+import AuthGuard from '@/hoc/AuthGuard';
 import { useFormik } from 'formik';
 
 const Write = () => {
@@ -91,4 +92,4 @@ const Write = () => {
   );
 };
 
-export default Write;
+export default AuthGuard(Write);
