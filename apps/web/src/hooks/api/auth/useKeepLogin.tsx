@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/lib/axios';
+import { axiosInstance, axiosWithoutToken } from '@/lib/axios';
 import { loginAction } from '@/redux/slices/userSlice';
 import { User } from '@/types/user.type';
 import { AxiosError } from 'axios';
@@ -19,10 +19,7 @@ const useKeepLogin = () => {
 
       dispatch(loginAction(data.data));
     } catch (error) {
-      // if (error instanceof AxiosError) {
-      //   // FIXME: chane alert to toast
-      //   alert(error?.response?.data);
-      // }
+      throw error;
     }
   };
   return { keepLogin };
