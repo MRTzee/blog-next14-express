@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import AuthGuard from '@/hoc/AuthGuard';
 import useCreateBlog from '@/hooks/api/blog/useCreateBlog';
 import { useAppSelector } from '@/redux/hooks';
-import { IFormCreateBlog } from '@/types/blog.type';
+import { IFormBlog } from '@/types/blog.type';
 import { useFormik } from 'formik';
 import 'react-quill/dist/quill.snow.css';
 
@@ -25,7 +25,7 @@ const Write = () => {
     values,
     errors,
     touched,
-  } = useFormik<IFormCreateBlog>({
+  } = useFormik<IFormBlog>({
     initialValues: {
       title: '',
       category: '',
@@ -37,8 +37,6 @@ const Write = () => {
       createBlog({ ...values, userId: id });
     },
   });
-
-  console.log(errors);
 
   return (
     <main className="container mx-auto px-4 ">
